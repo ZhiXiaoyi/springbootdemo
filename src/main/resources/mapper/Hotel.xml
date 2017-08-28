@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootdemo.biz.dao.mapper.HotelMapper">
+    <resultMap id="Hotel" type="com.example.springbootdemo.biz.entity.Hotel" >
+        <result column="id" property="id"/>
+        <result column="cityName" property="cityName" />
+        <result column="hotelName" property="hotelName" />
+        <result column="address" property="address" />
+        <result column="state" property="state" />
+        <result column="country" property="country" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,cityName,hotelName,address,state,country
+    </sql>
+    <!-- 根据ID查询数据 -->
+    <select id="findByCountry" parameterType="String" resultMap="Hotel">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM  hotel WHERE
+        cityName = #{cityName}
+    </select>
+    <insert id="saveHotel" >
+        INSERT INTO hotel VALUES (
+        #{id},
+        #{cityName},
+        #{hotelName},
+        #{address},
+        #{state},
+        #{country}
+        )
+    </insert>
+</mapper>
